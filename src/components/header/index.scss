@@ -13,7 +13,9 @@
     color: #428bca;
     display: flow-root;
     width: fit-content;
+    min-width: 100px;
     padding: 6px 10px;
+    text-align: center;
     &:hover {
       background: #77baf5;
       border: 1px solid #428bca;
@@ -138,8 +140,8 @@ header {
       padding: 0 30px;
       .social-item {
         /* background: rgb(235, 235, 176); */
-        font-size: 14px;
-        margin: 10px auto;
+        font-size: 32px;
+        margin: 10px 2px;
         display: inline-block;
         .cms-fa {
           border-radius: 50%;

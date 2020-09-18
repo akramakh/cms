@@ -6,7 +6,7 @@ import Hero from './components/sections/hero';
 import './App.scss';
 
 class App extends Component {
-  commingSoon = true;
+  commingSoon = false;
   render() {
     if (this.commingSoon) {
       return (

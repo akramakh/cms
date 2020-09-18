@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CommingSoon from './components/sections/commingSoon';
 import Header from './components/header';
 import Hero from './components/sections/hero';
+import About from './components/sections/about';
 
 import './App.scss';
 
@@ -21,6 +22,7 @@ class App extends Component {
         <Header />
         <section class='body-container'>
           <Hero />
+          <About />
         </section>
       </div>
     );

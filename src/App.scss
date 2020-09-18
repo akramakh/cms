@@ -32,6 +32,22 @@ a {
 h1 {
   text-transform: uppercase;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+  .col-md-3 {
+    width: 25%;
+  }
+  .col-md-6 {
+    width: 50%;
+  }
+  .col-md-9 {
+    width: 75%;
+  }
+  .col-md-12 {
+    width: 100%;
+  }
+}
 .btn {
   padding: 10px 12px;
   &.btn-primary {

@@ -3,6 +3,7 @@ import CommingSoon from './components/sections/commingSoon';
 import Header from './components/header';
 import Hero from './components/sections/hero';
 import About from './components/sections/about';
+import Footer from './components/sections/footer';
 
 import './App.scss';
 
@@ -23,6 +24,7 @@ class App extends Component {
         <section class='body-container'>
           <Hero />
           <About />
+          <Footer />
         </section>
       </div>
     );

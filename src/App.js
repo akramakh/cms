@@ -3,6 +3,7 @@ import CommingSoon from './components/sections/commingSoon';
 import Header from './components/header';
 import Hero from './components/sections/hero';
 import About from './components/sections/about';
+import Services from './components/sections/services';
 import Contact from './components/sections/contact';
 import Footer from './components/sections/footer';
 
@@ -25,6 +26,7 @@ class App extends Component {
         <section class='body-container'>
           <Hero />
           <About />
+          <Services />
           <Contact />
           <Footer />
         </section>

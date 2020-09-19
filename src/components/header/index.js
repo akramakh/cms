@@ -10,6 +10,11 @@ import {FirebaseDB} from '../../firebaseConfig';
 import './index.scss';
 
 const initData = {
+  status: 'top',
+  navStyle: {
+    'background-color': 'transparent',
+    'box-shadow': 'none',
+  },
   action_button: {
     text: 'Hire Me',
     url: '',
@@ -40,13 +45,34 @@ const iconsMap = {
 export default class Header extends Component {
   state = {...initData};
   headerRef = FirebaseDB.ref('sections/header/');
+
   componentDidMount() {
+    this.listener = document.addEventListener('scroll', (e) => {
+      let scrolled = document.scrollingElement.scrollTop;
+      let navStyle = {
+        'background-color': 'transparent',
+        'box-shadow': 'none',
+      };
+      if (scrolled >= 520) {
+        if (this.state.status !== 'scrolling') {
+          navStyle = {
+            'background-color': '#0d131a',
+            'box-shadow': '0 0 20px #0d131a99',
+          };
+          this.setState((state, props) => {
+            return {...state, status: 'scrolling', navStyle: navStyle};
+          });
+        }
+      } else {
+        if (this.state.status !== 'top') {
+          this.setState({status: 'top', navStyle});
+        }
+      }
+    });
     this.headerRef.on('value', (snapshot) => {
-      console.log('snapshot', snapshot);
       if (snapshot && snapshot.exists()) {
         const data = snapshot.val();
         let {action_button, logo, social_links} = data;
-        console.log('social_links', social_links);
         const keys = Object.keys(social_links);
         const social_list = keys.map((key) => social_links[key]);
         social_links = [...social_list];
@@ -73,10 +99,9 @@ export default class Header extends Component {
   };
 
   render = () => {
-    const {action_button, logo} = this.state;
-
+    const {navStyle, action_button, logo} = this.state;
     return (
-      <header id='top-nav'>
+      <header id='top-nav' style={navStyle}>
         <div class='cms-nav container cms-container'>
           <div class='row'>
             <div class='col-md-5 cms-col left-menu-col'>

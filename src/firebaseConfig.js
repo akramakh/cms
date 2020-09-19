@@ -1,17 +1,18 @@
-import * as firebase from 'firebase';
-
-var firebaseConfig = {
-  apiKey: 'AIzaSyB5GJYn3XqgMWerOst6tS_kEmbDk0OYF9I',
-  authDomain: 'work-hours-0.firebaseapp.com',
-  databaseURL: 'https://work-hours-0.firebaseio.com',
-  projectId: 'work-hours-0',
-  storageBucket: 'work-hours-0.appspot.com',
-  messagingSenderId: '737201264218',
-  appId: '1:737201264218:web:f84f1b7183195f4549ea63',
-  measurementId: 'G-EZ0ZFL6H4R'
+import firebase from 'firebase';
+var config = {
+  apiKey: 'AIzaSyBNOEpSeK0EsMU268qp6DH1cyOlb5wPq8I',
+  authDomain: 'akram-cms.firebaseapp.com',
+  databaseURL: 'https://akram-cms.firebaseio.com',
+  projectId: 'akram-cms',
+  storageBucket: 'akram-cms.appspot.com',
+  messagingSenderId: '696932428489',
+  appId: '1:696932428489:web:c8090555c7d09448193b18',
+  measurementId: 'G-HRXSL5KTWG',
 };
-
 // Initialize Firebase
-const data = firebase.initializeApp(firebaseConfig);
-export default data;
-//   firebase.analytics();
+const Firebase = firebase.initializeApp(config);
+export const FirebaseDB = Firebase.database();
+export const FirebaseAuth = Firebase.auth();
+firebase.analytics();
+
+export default Firebase;

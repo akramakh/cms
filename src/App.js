@@ -7,6 +7,7 @@ import Services from './components/sections/services';
 import Contact from './components/sections/contact';
 import Footer from './components/sections/footer';
 
+import 'antd/dist/antd.css';
 import './App.scss';
 
 class App extends Component {

@@ -77,3 +77,13 @@
     }
   }
 }
+
+.alert {
+  position: fixed;
+  top: 100px;
+  left: 50px;
+  width: 500px;
+  height: fit-content;
+  display: flex;
+  z-index: 100;
+}

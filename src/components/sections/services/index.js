@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   TiDeviceDesktop,
   TiVendorAndroid,
@@ -6,78 +6,69 @@ import {
   TiBrush,
   TiDevicePhone,
 } from 'react-icons/ti';
+import {FirebaseDB} from '../../../firebaseConfig';
 
 import './style.scss';
 
+const initData = {
+  items: [],
+  title: 'Services',
+  action_button: {
+    text: 'My Resume`',
+    url: '#about',
+    style: '{}',
+  },
+};
+
+const iconsMap = {
+  TiDeviceDesktop: <TiDeviceDesktop />,
+  TiVendorAndroid: <TiVendorAndroid />,
+  TiVendorApple: <TiVendorApple />,
+  TiBrush: <TiBrush />,
+  TiDevicePhone: <TiDevicePhone />,
+};
+
 export default function Services() {
+  const [title, setTitle] = useState(initData.title);
+  const [action_button, setActionButton] = useState(initData.action_button);
+  const [items, setItems] = useState(initData.items);
+
+  useEffect(() => {
+    const servicesRef = FirebaseDB.ref('sections/services/');
+    servicesRef.on('value', (snapshot) => {
+      if (snapshot && snapshot.exists()) {
+        const data = snapshot.val();
+        let {title, action_button, items} = data;
+        const keys = Object.keys(items);
+        const service_items = keys.map((key) => items[key]);
+        setTitle(title);
+        setActionButton(action_button);
+        setItems(service_items);
+      }
+    });
+  }, []);
+  console.log('items', items);
+  const renderServicesItems = () => {
+    const data = items.map((item) => {
+      return (
+        <div class='col-md-4'>
+          <div class='box box-services'>
+            <div class='icon'>{iconsMap[item.icon]}</div>
+            <h4 class='heading'>{item.title}</h4>
+            <p>{item.description}</p>
+          </div>
+        </div>
+      );
+    });
+    return <div class='row service-container'>{data}</div>;
+  };
   return (
     <section id='services' class='section-gray'>
       <div class='container clearfix'>
         <div class='row services'>
           <div class='col-md-12'>
-            <h1 class='heading'>Services</h1>
-            <div class='row service-container'>
-              <div class='col-md-4'>
-                <div class='box box-services'>
-                  <div class='icon'>
-                    <TiDeviceDesktop />
-                  </div>
-                  <h4 class='heading'>Website</h4>
-                  <p>Responsive Website Development (Laravel and Vue.js)</p>
-                </div>
-              </div>
-              <div class='col-md-4'>
-                <div class='box box-services'>
-                  <div class='icon'>
-                    <TiVendorAndroid />
-                  </div>
-                  <h4 class='heading'>Android</h4>
-                  <p>Android application Development & Design</p>
-                </div>
-              </div>
-              <div class='col-md-4'>
-                <div class='box box-services'>
-                  <div class='icon'>
-                    <TiVendorApple />
-                  </div>
-                  <h4 class='heading'>IOS</h4>
-                  <p>IOS application Development & Design</p>
-                </div>
-              </div>
-            </div>
-            <div class='row service-container'>
-              <div class='col-md-4'>
-                <div class='box box-services'>
-                  <div class='icon'>
-                    <TiDevicePhone />
-                  </div>
-                  <h4 class='heading'>UX &amp; UI</h4>
-                  <p>
-                    Cutting edge Designs and responsive with multi platforms
-                  </p>
-                </div>
-              </div>
-              <div class='col-md-4'>
-                <div class='box box-services'>
-                  <div class='icon'>
-                    <TiDevicePhone />
-                  </div>
-                  <h4 class='heading'>Graphic design</h4>
-                  <p>
-                    Logo & Pranding, Business Cards, Infographics and Vector Art
-                  </p>
-                </div>
-              </div>
-              <div class='col-md-4'>
-                <div class='box box-services'>
-                  <div class='icon'>
-                    <TiBrush />
-                  </div>
-                  <h4 class='heading'>Motion Graphic</h4>
-                  <p>Video Montagate, Text Animation and Motion Graphics</p>
-                </div>
-              </div>
-            </div>
+            <h1 class='heading'>{title}</h1>
+            {renderServicesItems()}
             <div class='row'>
               <div class='col-md-4'></div>
               <div class='col-md-4 center'>
@@ -87,7 +78,7 @@ export default function Services() {
                     data-toggle='modal'
                     data-target='#hireModal'
                   >
-                    Hire me
+                    {action_button.text}
                   </button>
                 </div>
               </div>

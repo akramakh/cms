@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FirebaseDB} from '../../../firebaseConfig';
 import './index.scss';
 
@@ -13,44 +13,40 @@ const initData = {
   description: 'Web Developer & UI/UX Designer',
 };
 
-export default class Hero extends Component {
-  state = {...initData};
-  headerRef = FirebaseDB.ref('sections/hero/');
-
-  componentDidMount() {
-    this.headerRef.on('value', (snapshot) => {
+export default function Hero () {
+  const [bgImage, setBGImage] = useState(initData.bg_image);
+  const [actionButton, setActionButton] = useState(initData.action_button);
+  const [greetingText, setGreetingText] = useState(initData.greeting_text);
+  const [description, setDescription] = useState(initData.description);
+  
+  useEffect(() => {
+    const headerRef = FirebaseDB.ref('sections/hero/');
+    headerRef.on('value', (snapshot) => {
       if (snapshot && snapshot.exists()) {
         const data = snapshot.val();
         let {action_button, bg_image, description, greeting_text} = data;
-        this.setState((state, props) => {
-          return {
-            ...state,
-            bg_image,
-            action_button,
-            description,
-            greeting_text,
-          };
-        });
+        setBGImage(bg_image);
+        setActionButton(action_button);
+        setGreetingText(greeting_text);
+        setDescription(description);
+        
       }
     });
-  }
+  });
 
-  render = () => {
-    const {bg_image, action_button, description, greeting_text} = this.state;
     return (
       <section id='hero'>
         <div class='bg' id='hero_bg'>
           <div class='overlay'></div>
-          <img src={bg_image} alt='background' />
+          <img src={bgImage} alt='background' />
         </div>
         <div class='greeting-container' id='greeting'>
-          <h1 class='question'>{greeting_text}</h1>
+          <h1 class='question'>{greetingText}</h1>
           <b class='answer'>{description}</b>
-          <a href={action_button.url} class='btn btn-primary explore-me'>
-            {action_button.text}
+          <a href={actionButton.url} class='btn btn-primary explore-me'>
+            {actionButton.text}
           </a>
         </div>
       </section>
     );
-  };
 }

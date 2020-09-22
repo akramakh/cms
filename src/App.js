@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import CommingSoon from './components/sections/commingSoon';
-import Header from './components/header';
+import Header from './components/sections/header';
 import Hero from './components/sections/hero';
 import About from './components/sections/about';
 import Services from './components/sections/services';

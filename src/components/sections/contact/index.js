@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {FaHome, FaPhone, FaEnvelope} from 'react-icons/fa';
 import {notification} from 'antd';
 import {FirebaseDB} from '../../../firebaseConfig';
+import Title from '../../uiComponents/title';
 
 import './style.scss';
 
@@ -157,7 +158,7 @@ export default function Contact() {
               <div class='row'>
                 <div class='col-md-1 cms-col'></div>
                 <div class='col-md-5 cms-col text'>
-                  <h2 class='title'>{title}</h2>
+                  <Title align='left'>{title}</Title>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: description,

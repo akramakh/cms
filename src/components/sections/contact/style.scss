@@ -8,14 +8,16 @@
       margin-top: 20px;
       color: #fff;
       height: fit-content;
-      .title {
+      .section-title {
         text-transform: uppercase;
         margin-bottom: 30px;
+        text-align: left;
       }
       .contact-msg {
         letter-spacing: 2px;
         font-weight: normal;
         font-size: 16px;
+        text-align: left;
       }
       span.tel {
         margin: 30px auto;

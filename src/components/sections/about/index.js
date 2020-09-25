@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FirebaseDB} from '../../../firebaseConfig';
+import Title from '../../uiComponents/title';
+
 import './style.scss';
 
 const initData = {
@@ -48,7 +50,7 @@ export default function About() {
             <div class='row'>
               <div class='col-md-12 cms-col'>
                 <div class='info'>
-                  <h1 class='name'>{name}</h1>
+                  <Title align='left'>{name}</Title>
                   <div
                     class='description'
                     dangerouslySetInnerHTML={{

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FirebaseDB} from '../../../firebaseConfig';
+import Title from '../../uiComponents/title';
 
 import './style.scss';
 
@@ -117,7 +118,7 @@ export default function Portfolio() {
     <section id='portfolio'>
       <div class='container cms-container'>
         <div class='row'>
-          <h1 class='section-title'>{title}</h1>
+          <Title color='#1c7ff0'>{title}</Title>
         </div>
         <div class='row'>{renderMenu()}</div>
         {renderProjects()}

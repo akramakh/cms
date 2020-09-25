@@ -7,6 +7,7 @@ import {
   TiDevicePhone,
 } from 'react-icons/ti';
 import {FirebaseDB} from '../../../firebaseConfig';
+import Title from '../../uiComponents/title';
 
 import './style.scss';
 
@@ -69,7 +70,7 @@ export default function Services(props) {
       <div class='container clearfix'>
         <div class='row services'>
           <div class='col-md-12'>
-            <h1 class='heading'>{title}</h1>
+            <Title color='#1c7ff0'>{title}</Title>
             {renderServicesItems()}
             <div class='row'>
               <div class='col-md-4'></div>

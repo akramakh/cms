@@ -135,6 +135,26 @@ h1 {
   display: grid;
 }
 
+.btn {
+  &.hire-me {
+    margin: 10px auto;
+    line-height: 1.5;
+    border: 1px solid #519cdd;
+    background-color: transparent;
+    color: #428bca;
+    display: flow-root;
+    width: fit-content;
+    min-width: 100px;
+    padding: 6px 10px;
+    text-align: center;
+    &:hover {
+      background: #77baf5;
+      border: 1px solid #428bca;
+      color: #fff;
+    }
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

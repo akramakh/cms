@@ -43,12 +43,14 @@ const iconsMap = {
   FaInstagram: <FaInstagram className='cms-fa' />,
 };
 
-export default function Header() {
+export default function Header(props) {
   const [logo, setLogo] = useState(initData.logo);
   const [status, setStatus] = useState(initData.status);
   const [navStyle, setNavStyle] = useState(initData.navStyle);
   const [socialLinks, setSocialLinks] = useState(initData.social_links);
   const [actionButton, setActionButton] = useState(initData.action_button);
+
+  const {onClick} = props;
 
   useEffect(() => {
     const headerRef = FirebaseDB.ref('sections/header/');
@@ -157,11 +159,7 @@ export default function Header() {
                   <div class='social-container'>{renderSocialLinks()}</div>
                 </div>
                 <div class='col-md-2 cms-col hire-col pad-0'>
-                  <a
-                    class='btn btn-primary hire-me'
-                    data-toggle='modal'
-                    data-target='#hireModal'
-                  >
+                  <a class='btn btn-primary hire-me' onClick={onClick}>
                     {actionButton.text}
                   </a>
                 </div>

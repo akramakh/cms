@@ -1,28 +1,6 @@
 .top-logo {
   width: 16%;
 }
-.btn {
-  &.hire-me {
-    /* display: block; */
-    /* height: 36px; */
-    margin: 10px auto;
-    border-radius: 18px;
-    line-height: 15px;
-    background: none;
-    border: 1px solid #519cdd;
-    color: #428bca;
-    display: flow-root;
-    width: fit-content;
-    min-width: 100px;
-    padding: 6px 10px;
-    text-align: center;
-    &:hover {
-      background: #77baf5;
-      border: 1px solid #428bca;
-      color: #fff;
-    }
-  }
-}
 header {
   width: 100%;
   display: inline-table;
@@ -154,6 +132,11 @@ header {
             background: #ffffff30;
           }
         }
+      }
+    }
+    .btn {
+      &.hire-me {
+        border-radius: 18px;
       }
     }
   }

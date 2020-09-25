@@ -28,10 +28,12 @@ const iconsMap = {
   TiDevicePhone: <TiDevicePhone />,
 };
 
-export default function Services() {
+export default function Services(props) {
   const [title, setTitle] = useState(initData.title);
   const [action_button, setActionButton] = useState(initData.action_button);
   const [items, setItems] = useState(initData.items);
+
+  const {onClick} = props;
 
   useEffect(() => {
     const servicesRef = FirebaseDB.ref('sections/services/');
@@ -73,11 +75,7 @@ export default function Services() {
               <div class='col-md-4'></div>
               <div class='col-md-4 center'>
                 <div class='box box-button'>
-                  <button
-                    class='btn btn-primary hire-me'
-                    data-toggle='modal'
-                    data-target='#hireModal'
-                  >
+                  <button class='btn btn-primary hire-me' onClick={onClick}>
                     {action_button.text}
                   </button>
                 </div>

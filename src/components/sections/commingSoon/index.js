@@ -1,21 +1,26 @@
-import React, {useState} from 'react';
-import moment from 'moment';
+import React, {useState, useEffect} from 'react';
+import moment, { min } from 'moment';
 import {FaFacebookF, FaInstagram, FaTwitter} from 'react-icons/fa';
 import Logo from '../../../assets/images/logo.png';
 import Bg01 from '../../../assets/images/bg01.jpg';
 import Bg02 from '../../../assets/images/bg02.jpg';
+import NotifyMePopup from '../../notifyMePopup';
 import './style.scss';
 
-export default class CommingSoon extends React.Component {
-  state = {
-    days: undefined,
-    hours: undefined,
-    minutes: undefined,
-    seconds: undefined,
-  };
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      const {timeTillDate, timeFormat} = this.props;
+export default function CommingSoon() {
+  const [notifyMePopupVisible, setNotifyMePopupVisible] = useState(false);
+  const [days, setDays] = useState(undefined);
+  const [hours, setHours] = useState(undefined);
+  const [minutes, setMinutes] = useState(undefined);
+  const [seconds, setSeconds] = useState(undefined);
+  
+  useEffect((props) => {
+    const interval = setInterval(() => {
+      const props = {
+        timeTillDate: '05 26 2019, 6:00 am',
+        timeFormat: 'MM DD YYYY, h:mm a'
+      }
+      const {timeTillDate, timeFormat} = props;
       const then = moment(timeTillDate, timeFormat);
       const now = moment();
       const countdown = moment(then - now);
@@ -24,18 +29,37 @@ export default class CommingSoon extends React.Component {
       const minutes = countdown.format('mm');
       const seconds = countdown.format('ss');
 
-      this.setState({days, hours, minutes, seconds});
+      setDays(days);
+      setHours(hours);
+      setMinutes(minutes);
+      setSeconds(seconds);
     }, 1000);
-  }
-
-  componentWillUnmount() {
-    if (this.interval) {
-      clearInterval(this.interval);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
     }
-  }
+  }, [])
+  // componentDidMount() {
+  //   this.interval = setInterval(() => {
+  //     const {timeTillDate, timeFormat} = this.props;
+  //     const then = moment(timeTillDate, timeFormat);
+  //     const now = moment();
+  //     const countdown = moment(then - now);
+  //     const days = countdown.format('D');
+  //     const hours = countdown.format('HH');
+  //     const minutes = countdown.format('mm');
+  //     const seconds = countdown.format('ss');
 
-  render() {
-    const {days, hours, minutes, seconds} = this.state;
+  //     this.setState({days, hours, minutes, seconds});
+  //   }, 1000);
+  // }
+
+  // componentWillUnmount() {
+  //   if (this.interval) {
+  //     clearInterval(this.interval);
+  //   }
+  // }
 
     if (!seconds) {
       return null;
@@ -63,7 +87,8 @@ export default class CommingSoon extends React.Component {
             </div>
 
             <div class='action-btn'>
-              <a href='#' class='size2 m1-txt1 flex-c-m how-btn1 trans-04'>
+              <a class='size2 m1-txt1 flex-c-m how-btn1 trans-04'
+              onClick={() => setNotifyMePopupVisible(true)}>
                 Notify Me
               </a>
             </div>
@@ -112,7 +137,12 @@ export default class CommingSoon extends React.Component {
             </a>
           </div>
         </div>
+        <NotifyMePopup 
+        visible={notifyMePopupVisible}
+        onOk={() => setNotifyMePopupVisible(false)}
+        onCancel={() => setNotifyMePopupVisible(false)}
+        />
       </section>
     );
-  }
+  
 }
